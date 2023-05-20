@@ -1,5 +1,7 @@
 # Program to generate random number 1-100 on every keypress by the user
 
+# TODO Add capability to handle special keys (i.e., Ctrl, Alt, arrow keys, etc.)
+
 import random
 import platform
 
@@ -20,13 +22,16 @@ def handle_windows_key_press():
     import msvcrt
 
     while True:
-        if msvcrt.kbhit():
-            key = msvcrt.getch().decode('utf-8')
-            if key.lower() == 'q':
-                print()
-                break
-            else:
-                print(generate_random_number())
+        try:
+            if msvcrt.kbhit():
+                key = msvcrt.getch().decode('utf-8')
+                if key.lower() == 'q':
+                    print()
+                    break
+                else:
+                    print(generate_random_number())
+        except KeyboardInterrupt:
+            break
 
 # Handle key presses on Unix-based systems
 def handle_unix_key_press():
@@ -45,23 +50,29 @@ def handle_unix_key_press():
         return ch
 
     while True:
-        key = getchar()
-        if key.lower() == 'q':
-            print()
+        try:
+            key = getchar()
+            if key.lower() == 'q':
+                print()
+                break
+            else:
+                print(generate_random_number())
+        except KeyboardInterrupt:
             break
-        else:
-            print(generate_random_number())
 
 # Main program
 def main():
     print("\nPress any key (except 'q') to generate a random number between 1 and 100.")
     print("Pressing 'q' exits the program.\n")
-    if is_windows():
-        handle_windows_key_press()
-    elif is_unix():
-        handle_unix_key_press()
-    else:
-        print("Unsupported platform.")
+    try:
+        if is_windows():
+            handle_windows_key_press()
+        elif is_unix():
+            handle_unix_key_press()
+        else:
+            print("Unsupported platform.")
+    except Exception as e:
+        print(f"\nAn error occurred: {e}\n")
 
 if __name__ == "__main__":
     main()
