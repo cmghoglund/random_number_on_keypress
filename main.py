@@ -1,7 +1,5 @@
 # Program to generate random number 1-100 on every keypress by the user
 
-# TODO Add capability to handle special keys (i.e., Ctrl, Alt, arrow keys, etc.)
-
 import random
 import platform
 
@@ -73,8 +71,9 @@ def main():
             handle_unix_key_press()
         else:
             print("Unsupported platform.")
-    except Exception as e:
-        print(f"\nAn error occurred: {e}\n")
+    except Exception:
+        print()
+        pass
 
 if __name__ == "__main__":
     main()
