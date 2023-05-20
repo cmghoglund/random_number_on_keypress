@@ -31,6 +31,7 @@ def handle_windows_key_press():
                 else:
                     print(generate_random_number())
         except KeyboardInterrupt:
+            print()
             break
 
 # Handle key presses on Unix-based systems
@@ -58,6 +59,7 @@ def handle_unix_key_press():
             else:
                 print(generate_random_number())
         except KeyboardInterrupt:
+            print()
             break
 
 # Main program
