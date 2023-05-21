@@ -18,8 +18,7 @@ def handle_windows_key_press():
                 key = msvcrt.getch().decode('utf-8')
                 return key
         except KeyboardInterrupt:
-            print()
-            break
+            return " "
 
 # Handle key presses on Unix-based systems
 def handle_unix_key_press():
@@ -42,8 +41,7 @@ def handle_unix_key_press():
             key = _getchar()
             return key
         except KeyboardInterrupt:
-            print()
-            break
+            return " "
 
 def get_pressed_key():
     try:
@@ -54,8 +52,7 @@ def get_pressed_key():
             pressed_key = handle_unix_key_press()
             return pressed_key
         else:
-            print()
+            print("Unsupported platform. Exiting program...\n")
             sys.exit()
     except Exception:
-        print()
-        pass
+        return " "
