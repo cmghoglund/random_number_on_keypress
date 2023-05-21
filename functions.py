@@ -27,7 +27,7 @@ def handle_unix_key_press():
     import tty
     import termios
 
-    def getchar():
+    def _getchar():
         file_descriptor = sys.stdin.fileno()
         old_settings = termios.tcgetattr(file_descriptor)
         try:
@@ -39,7 +39,7 @@ def handle_unix_key_press():
 
     while True:
         try:
-            key = getchar()
+            key = _getchar()
             return key
         except KeyboardInterrupt:
             print()
